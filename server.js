@@ -24,6 +24,19 @@ app.get('/api/products/:id', (req, res) => {
     }); 
 });
 
+// POST new product 
+app.post('/api/products', (req, res) => { 
+    const { name, description, price, category, inStock } = req.body; 
+    db.run(` 
+        INSERT INTO products (name, description, price, category, inStock) 
+        VALUES (?, ?, ?, ?, ?) 
+        `, [name, description, price, category, inStock], 
+        function(err) { 
+            res.json({ id: this.lastID }); 
+        }
+    ); 
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
