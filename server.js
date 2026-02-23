@@ -37,6 +37,19 @@ app.post('/api/products', (req, res) => {
     ); 
 });
 
+//Updating product information
+app.put('/api/products/:id', (req, res) => { 
+    const id = req.params.id; 
+    const { name, description, price, category, inStock } = req.body; 
+    db.run(` UPDATE products SET name = ?, description = ?, price = ?, category = ?, inStock = ? WHERE id = ? 
+        `, [name, description, price, category, inStock, id], 
+        function(err) { 
+            res.json({ message: 'Product updated'
+        }); 
+        }
+    ); 
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
