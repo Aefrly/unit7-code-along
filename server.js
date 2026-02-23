@@ -15,3 +15,11 @@ app.get('/api/products', (reg, res) => {
         res.json(rows); 
     });
 });
+
+// GET single product
+app.get('/api/products/:id', (req, res) => { 
+    const id = req.params.id; 
+    db.all('SELECT * FROM products WHERE id = ?', [id], (err, row) => { 
+        res.json(row); 
+    }); 
+});
