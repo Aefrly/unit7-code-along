@@ -50,6 +50,16 @@ app.put('/api/products/:id', (req, res) => {
     ); 
 });
 
+// DELETE product 
+app.delete('/api/products/:id', (req, res) => { 
+    const id = req.params.id; 
+    db.run('DELETE FROM products WHERE id = ?', [id], 
+        function(err) { 
+            res.json({ message: 'Product deleted' }); 
+        }
+    ); 
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
