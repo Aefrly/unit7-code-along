@@ -23,3 +23,7 @@ app.get('/api/products/:id', (req, res) => {
         res.json(row); 
     }); 
 });
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
